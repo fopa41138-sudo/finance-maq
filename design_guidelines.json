@@ -1,0 +1,169 @@
+{
+  "project_title": "Módulo Financeiro - Gestão de Ordens de Serviço & Finanças",
+  "theme": "Light Theme (Tema Claro)",
+  "language": "pt-BR",
+  "currency": "BRL (R$)",
+  "color_palette": {
+    "background": "#FFFFFF",
+    "surface": "#F8FAFC",
+    "surface_secondary": "#F1F5F9",
+    "border": "#E2E8F0",
+    "text_primary": "#0F172A",
+    "text_secondary": "#475569",
+    "text_muted": "#64748B",
+    "primary": {
+      "default": "#2563EB",
+      "hover": "#1D4ED8",
+      "active": "#1E40AF",
+      "light": "#EFF6FF",
+      "text": "#FFFFFF"
+    },
+    "income": {
+      "default": "#16A34A",
+      "light": "#DCFCE7",
+      "border": "#86EFAC",
+      "text": "#15803D"
+    },
+    "expense": {
+      "default": "#DC2626",
+      "light": "#FEE2E2",
+      "border": "#FCA5A5",
+      "text": "#B91C1C"
+    },
+    "pending_warning": {
+      "default": "#D97706",
+      "light": "#FEF3C7",
+      "border": "#FCD34D",
+      "text": "#B45309"
+    },
+    "alert_danger": {
+      "default": "#EF4444",
+      "light": "#FEE2E2",
+      "border": "#F87171",
+      "text": "#991B1B"
+    },
+    "chart_colors": [
+      "#2563EB",
+      "#16A34A",
+      "#D97706",
+      "#9333EA",
+      "#0891B2",
+      "#E11D48",
+      "#4F46E5",
+      "#059669"
+    ]
+  },
+  "typography": {
+    "font_family_main": "Plus Jakarta Sans, sans-serif",
+    "font_family_heading": "Outfit, sans-serif",
+    "font_family_mono": "JetBrains Mono, monospace",
+    "scales": {
+      "h1": "text-3xl sm:text-4xl font-bold tracking-tight text-slate-900",
+      "h2": "text-2xl font-bold tracking-tight text-slate-900",
+      "h3": "text-xl font-semibold text-slate-900",
+      "h4": "text-lg font-semibold text-slate-800",
+      "body_lg": "text-base text-slate-700",
+      "body": "text-sm text-slate-700",
+      "small": "text-xs font-medium text-slate-500",
+      "badge": "text-xs font-semibold"
+    }
+  },
+  "layout_and_structure": {
+    "container_padding": "p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto",
+    "card_style": "bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all p-5",
+    "grid_kpi": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6",
+    "grid_dashboard_charts": "grid grid-cols-1 lg:grid-cols-3 gap-6",
+    "navigation_tabs": "border-b border-slate-200 bg-white sticky top-0 z-30 px-4 sm:px-8 pt-2"
+  },
+  "tabs_structure": [
+    {
+      "id": "visao-geral",
+      "label": "Visão Geral",
+      "description": "Dashboard consolidado com KPIs, comparação com período anterior, fluxo de caixa e gráficos de categorias/técnicos"
+    },
+    {
+      "id": "entradas",
+      "label": "Entradas",
+      "description": "Lançamentos de receitas, recebimentos de OS, pagamentos via Pix, cartão e dinheiro com filtros e conciliação"
+    },
+    {
+      "id": "saidas",
+      "label": "Saídas",
+      "description": "Lançamentos de despesas operacionais e custos com fornecedores, status pago/previsto/em atraso"
+    },
+    {
+      "id": "categorias",
+      "label": "Categorias",
+      "description": "Gestão de categorias financeiras e tetos de gastos com alertas de 80% e 100%"
+    },
+    {
+      "id": "despesas-fixas",
+      "label": "Despesas Fixas",
+      "description": "Recorrências mensais, vencimentos, projeção de caixa fixo"
+    },
+    {
+      "id": "metas-limites",
+      "label": "Metas e Limites",
+      "description": "Orçamentos e limites por categoria com barras de progresso visual e avisos de estouro"
+    },
+    {
+      "id": "tecnicos",
+      "label": "Técnicos",
+      "description": "Ranking de desempenho, fechamento de comissões, valores a repassar e histórico por técnico"
+    },
+    {
+      "id": "bancos",
+      "label": "Bancos (Pluggy Open Finance)",
+      "description": "Simulação de integração Open Finance, extrato bancário sincronizado e sugestões de conciliação automática"
+    },
+    {
+      "id": "assistentes",
+      "label": "Assistentes (IA)",
+      "description": "Resumo financeiro semanal inteligente com insights de caixa, alertas de despesas fora do padrão e recomendações"
+    }
+  ],
+  "key_features_and_components": {
+    "role_toggle": "Demo User Switcher na barra superior: [Admin] (acesso total) vs [Técnico] (visão restrita apenas aos seus lançamentos e comissões)",
+    "kpi_cards": "Entradas Total, Saídas Total, Saldo Atual, A Receber vs Recebido, com percentual de variação em relação ao período anterior (ex: +12.5% vs mês passado)",
+    "filters_bar": "Filtros por Período (Hoje, Esta Semana, Este Mês, Personalizado), Categoria, Técnico, Status (Pago, Previsto, Em Atraso) e Forma de Pagamento (Cartão, Pix, Dinheiro)",
+    "os_integration_modal": "Modal de Ordem de Serviço detalhado mostrando: Valor Cobrado do Cliente, Recebido, Custo de Peças/Mão de Obra e Lucro Líquido da OS",
+    "budget_alerts": "Barras de progresso com aviso em 80% (Warning Alerta Amarelo/Laranja) e 100% (Estouro Alerta Vermelho)",
+    "technician_closing": "Fechamento de técnico para liquidar comissões e repasses com botão 'Efetuar Repasse' e histórico de fechamentos",
+    "bank_reconciliation": "Conciliação bancária Open Finance Pluggy com botão 'Marcar Conferido / Conciliar' e badge de conferência",
+    "ai_weekly_summary": "Assistente virtual de IA com resumos executivos em linguagem natural, destaques da semana e projeção de faturamento"
+  },
+  "interactive_states": {
+    "button_primary": "bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg px-4 py-2 shadow-sm transition-all focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50",
+    "button_secondary": "bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-medium rounded-lg px-4 py-2 transition-all focus:ring-2 focus:ring-slate-200",
+    "button_danger": "bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg px-4 py-2 shadow-sm transition-all",
+    "status_badges": {
+      "pago": "bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs px-2.5 py-1 rounded-full font-semibold inline-flex items-center gap-1",
+      "previsto": "bg-amber-50 text-amber-700 border border-amber-200 text-xs px-2.5 py-1 rounded-full font-semibold inline-flex items-center gap-1",
+      "em_atraso": "bg-rose-50 text-rose-700 border border-rose-200 text-xs px-2.5 py-1 rounded-full font-semibold inline-flex items-center gap-1",
+      "conferido": "bg-blue-50 text-blue-700 border border-blue-200 text-xs px-2.5 py-1 rounded-full font-semibold inline-flex items-center gap-1"
+    }
+  },
+  "test_id_conventions": {
+    "role_selector": "data-testid='user-role-selector'",
+    "tab_button": "data-testid='tab-nav-{tab_id}'",
+    "kpi_card": "data-testid='kpi-card-{kpi_name}'",
+    "transaction_table": "data-testid='transaction-list-table'",
+    "transaction_form_submit": "data-testid='transaction-form-submit-btn'",
+    "filter_period": "data-testid='filter-period-select'",
+    "filter_category": "data-testid='filter-category-select'",
+    "filter_technician": "data-testid='filter-technician-select'",
+    "os_modal_trigger": "data-testid='os-finance-modal-btn-{os_id}'",
+    "technician_payout_btn": "data-testid='technician-payout-btn-{tech_id}'",
+    "reconcile_btn": "data-testid='reconcile-transaction-btn-{tx_id}'",
+    "ai_generate_summary_btn": "data-testid='ai-summary-generate-btn'"
+  },
+  "instructions_to_main_agent": [
+    "Usar React e Tailwind CSS no frontend com componentes do Radix / Shadcn disponíveis em /src/components/ui/.",
+    "Toda a interface deve estar em Português do Brasil (pt-BR) com formatação monetária em Real BRL (R$ 1.250,00).",
+    "Manter o tema claro rigoroso: Fundo #FFFFFF / #F8FAFC, texto escuro #0F172A, botões principais azuis (#2563EB).",
+    "Garantir dropdowns, menus e modais com fundo sólido ou semi-sólido opaco (nunca completamente transparente).",
+    "Implementar alternador de perfil Demo (Admin / Técnico) visível no cabeçalho para testar as permissões e visões restritas do técnico.",
+    "Utilizar Recharts para gráficos de categorias (Pie/Donut) e evolução mensal/semanal (Bar/Line Chart).",
+    "Adicionar data-testid em todos os botões, selects, tabelas, cards de KPI e abas conforme a convenção declarada."
+  ]
+}
