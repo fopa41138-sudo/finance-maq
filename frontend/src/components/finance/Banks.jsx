@@ -37,6 +37,43 @@ const CreateDialog = ({ state, onClose, onSaved }) => {
   );
 };
 
+const WebhookCard = ({ onSynced }) => {
+  const [info, setInfo] = useState(null);
+  const load = useCallback(() => { api.get("/banks/webhook").then((r) => setInfo(r.data)).catch(() => {}); }, []);
+  useEffect(() => { load(); }, [load]);
+  const register = async () => {
+    try { await api.post("/banks/webhook/register"); toast.success("Webhook registrado no Pluggy"); load(); } catch (e) { toast.error(errMsg(e)); }
+  };
+  const syncAll = async () => {
+    try { await api.post("/banks/sync-all"); toast.success("Sincronização iniciada"); setTimeout(() => { load(); onSynced(); }, 6000); } catch (e) { toast.error(errMsg(e)); }
+  };
+  const copy = () => { navigator.clipboard.writeText(info.url); toast.success("URL copiada"); };
+  if (!info) return null;
+  return (
+    <Card className="p-5 space-y-3" data-testid="bank-webhook-card">
+      <div className="flex flex-wrap justify-between items-start gap-2">
+        <div>
+          <h3 className="font-semibold text-slate-900">Atualização automática</h3>
+          <p className="text-xs text-slate-500">Sincronização diária às 6h (Brasília) e webhook do Pluggy para novidades em tempo real.</p>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={syncAll} data-testid="bank-sync-all-btn"><RefreshCw size={14} className="mr-1" />Sincronizar tudo agora</Button>
+          {!info.registered && <Button size="sm" className="bg-blue-600 hover:bg-blue-700" onClick={register} data-testid="bank-webhook-register-btn">Registrar webhook no Pluggy</Button>}
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <Input readOnly value={info.url} className="font-mono text-xs bg-slate-50" data-testid="bank-webhook-url" />
+        <Button variant="outline" size="sm" onClick={copy} data-testid="bank-webhook-copy-btn">Copiar</Button>
+      </div>
+      <div className="text-xs text-slate-600 flex flex-wrap gap-x-4 gap-y-1">
+        <span data-testid="bank-webhook-status">Webhook: <b className={info.registered ? "text-emerald-700" : "text-amber-700"}>{info.registered ? "registrado no Pluggy" : "não registrado"}</b></span>
+        <span>Última sincronização: {info.last_sync ? `${new Date(info.last_sync.finished_at).toLocaleString("pt-BR")} (${info.last_sync.trigger === "cron" ? "automática" : "manual"})` : "-"}</span>
+        <span>Último evento: {info.last_events[0] ? `${info.last_events[0].event} em ${new Date(info.last_events[0].received_at).toLocaleString("pt-BR")}` : "-"}</span>
+      </div>
+    </Card>
+  );
+};
+
 const BankRow = ({ bt, onLink, onCreate, onIgnore }) => (
   <tr className="border-t border-slate-100 align-top" data-testid={`bank-tx-row-${bt.id}`}>
     <td className="px-4 py-3 whitespace-nowrap">{fmtDate(bt.date)}</td>
@@ -96,6 +133,7 @@ export default function Banks() {
         <Button className="bg-blue-600 hover:bg-blue-700" onClick={connect} disabled={!configured || busy} data-testid="bank-connect-btn"><Landmark size={16} className="mr-1" />Conectar banco</Button>
       </SectionTitle>
       {configured === false && <Card className="p-4 border-amber-200 bg-amber-50/50 text-sm text-amber-900" data-testid="bank-not-configured">As credenciais do Pluggy ainda não foram configuradas no servidor (PLUGGY_ID e PLUGGY_SECRET).</Card>}
+      {configured && <WebhookCard onSynced={load} />}
       <Card className="p-4 text-xs text-slate-600 flex gap-2"><Info size={14} className="text-blue-600 shrink-0 mt-0.5" />Sandbox: escolha "Pluggy Bank" e use usuário <b>user-ok</b>, senha <b>password-ok</b> (código MFA 123456 se pedido). As sugestões de vínculo comparam valor exato e data (±5 dias).</Card>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.length === 0 && <Card className="md:col-span-3"><Empty text="Nenhuma conta conectada" testId="bank-items-empty" /></Card>}

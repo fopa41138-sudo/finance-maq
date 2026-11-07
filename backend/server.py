@@ -13,6 +13,7 @@ from core import db, client, current_user, require_admin, make_token, generate_r
 from routes_finance import router as finance_router
 from routes_control import router as control_router
 from routes_automation import router as automation_router
+from routes_sync import router as sync_router
 from seed import seed
 
 INDEXES = {
@@ -27,6 +28,9 @@ INDEXES = {
     ],
     "service_orders": [IndexModel([("id", ASCENDING)], name="id", unique=True)],
     "bank_transactions": [IndexModel([("id", ASCENDING)], name="id", unique=True)],
+    "webhook_events": [IndexModel([("event_id", ASCENDING)], name="event_id", unique=True)],
+    "cron_runs": [IndexModel([("run_id", ASCENDING)], name="run_id", unique=True)],
+    "sync_runs": [IndexModel([("finished_at", ASCENDING)], name="finished_at")],
 }
 
 
@@ -94,6 +98,7 @@ app.include_router(api_router)
 app.include_router(finance_router)
 app.include_router(control_router)
 app.include_router(automation_router)
+app.include_router(sync_router)
 
 app.add_middleware(
     CORSMiddleware,
